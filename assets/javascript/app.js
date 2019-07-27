@@ -2,18 +2,82 @@
 $(function () {
 
     // Make some lets here //
+    let questions = 0;
+    let answers = [];
+    let triviaData = [];
+    // From Elias //
+    // let currentAnswerSet = triviaData[currentQuestion].incorrect_answers;
+    // currentAnswerSet.push(triviaData[currentQuestion].correct_answer);
 
+    // let thirtySeconds = setTimeout(1000 * 30);
+    //Timer code
+    let seconds = 30;
+
+    function startCountDown() {
+
+        seconds--;
+
+        $($timer).text(`Time Left: ${seconds}`);
+
+        if (seconds === 0) {
+            clearTimeout(timer);
+            return false;
+        }
+        else {
+            setTimeout(countdown, 1000)
+        }
+    }
 
     // Need a function for start btn click event that will call a few other functions into action.
     // 1st this should hide the start btn // This is working now //
-    $(document).on('click', 'button#startButton', function startGame() {
+    $(document).on('click', '#startButton', function startGame() {
         $(this).hide();
         // 2nd then call another function named showEverythingQuestion Section.
         // Now add code to show the question section here.....
         // 3rd it will also call the startCountDown function which will use a setTimer thing for 30 seconds.
+        // question timmer, show only one question durring this timeout or until the user clicks a submitAnswerButton
+        startCountDown();
+        $("#countDown").append((seconds));
+        $(".submitAnswerButton");
     });
 
+
+    // Get question into h3 class="questionField"// 
+    let $questionField = $(".questionField");
+    // Get question from index 0 of response.results
+
     // AJAX request //
+
+    // WORKING CODE at the console level //
+    function getData() {
+        var queryURL = 'https://opentdb.com/api.php?amount=10&category=15&difficulty=medium&type=multiple';
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+
+            // triviaData = response;
+            console.log(response.results);
+            console.log(response.results[0].question);
+            $(".questionField").html(response.results[0].question);
+            $(`.btn1`).html(response.results[`0`].incorrect_answers[0]);
+            $(`.btn2`).html(response.results[`0`].incorrect_answers[1]);
+            $(`.btn3`).html(response.results[`0`].incorrect_answers[2]);
+            $(`.btn4`).html(response.results[`0`].correct_answer);
+
+            // response.results.questions.forEach(elem => {
+
+            // })
+
+        });
+
+    };
+    getData();
+
+    // Maybe because the multpiple child thing
+    // need to filter the getdata to only get the values from the Json object that I specify 
+
+
     // ORIGINAL //
     // $.ajax({
     //     url: `https://opentdb.com/api.php?amount=10&category=15&difficulty=medium&type=multiple`,
@@ -26,39 +90,6 @@ $(function () {
     //     return (response.results);
     // });
 
-    // WORKING CODE at the console level //
-    function getdata() {
-        var queryURL = 'https://opentdb.com/api.php?amount=10&category=15&difficulty=medium&type=multiple';
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function (response) {
-            console.log(response);
-            // response.results.forEach(elem => {
-            //     let responseArray = $(); ... took a pciture with my cell phone that might help //
-            // })
-
-        });
-
-    };
-    getdata();
-    // Not working at the global level
-    // console.log(response.results[0].question);
-    // console.log(response.results[0].correct_answer);
-    // console.log(response.results[0].incorrect_answers);
-    // This almost pulls it but I can't figure out how to drill into what should be data.responseJSON.results...
-    // Maybe because the multpiple child thing
-    // need to filter the getdata to only get the values from the Json object that I specify 
-    // Need to use .append instead .text to fix the &quot; issue
-
-    // $.get("https://opentdb.com/api.php?amount=10&category=15&difficulty=medium&type=multiple")
-    //     .then(function(response) {
-    //         console.log(response)
-
-    //     }
-
-    // let data = getdata();
-    // let test = JSON.stringify(data)
 
     // };
 

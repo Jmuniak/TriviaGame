@@ -14,6 +14,15 @@
 </head>
 
 <body>
+    <style>
+        .hide-me {
+            display: none;
+        }
+
+        .show-me {
+            display: block;
+        }
+    </style>
 
     <!-- Content -->
     <div class="text-center">
@@ -23,9 +32,9 @@
             <button id="startButton" class="col-3 offset-3">Start Button</button>
         </div>
     </div>
-    <section class="jumbotron everythingQuestion text-center">
+    <section id="questionSection" class="jumbotron  text-center hide-me">
         <!-- Time remaining field -->
-        <div id="countDown">
+        <div id="timeRemaining">
             <h5>Time remaining: 30</h5>
         </div>
         <!-- Question display field -->

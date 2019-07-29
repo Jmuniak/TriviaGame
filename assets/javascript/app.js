@@ -107,9 +107,28 @@ $(function () {
                 //         [array[i], array[j]] = [array[j], array[i]]; // swap elements
                 //     }
                 // } 
-
+                // Pseudo code ===================================================================
                 // need a click event to check their submitted answer against the correctanswer data
-                // 
+                // Function clickHandler for answer btns () (Not started)
+                //                 Reset timer and wait 7 seconds before starting to count down again.
+                //                 Check what answer btn was clicked. (Not started)
+                //                 Run and if else to check against the correct answer data value for that Question. (Not started)	
+                // 	Count their score for correct answers, increment the global var Score if correct.. (Not started)	
+                // 	Display correct answer for 7 seconds or if they got it right do something fun.
+                // 	After the 7 seconds, for loop to move onto the next question in the array without user input. (This is tough)
+                //                 Populate question and answer options again. (Not started)
+                //                 Else run EndGame if the array length has been reached.
+
+                //                 Function EndGame()(Not started)
+                //                 Reset Timer.
+                //                 Display correct answer score to the user.
+                //                 Display PlayAgain ? btn.
+
+                // Function PlayAgain btn()(Not started)
+                //                 Calls the startGame btn function again without refreshing the page.
+                //                 Essentially is the StartGame Btn but it will say play again at this point instead of start game.
+
+                //                 Write a Readme(not started)
 
 
             });

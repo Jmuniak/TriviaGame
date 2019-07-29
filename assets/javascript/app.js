@@ -2,9 +2,12 @@
 $(function () {
     // Make some lets here //
 
-    // let questions = 0;
-    // let answers = [];
-    // let triviaData = [];
+    let questions = 0;
+    let thisQuestion = 0;
+    let answers = [];
+    let correctAnswer;
+    let userAnswer;
+    let triviaData = [];
 
 
 
@@ -19,7 +22,7 @@ $(function () {
     $("#submitAnswerBtn").on("click", stop);
 
     function timeUp() {
-        clearTimeout(timeRemaining);
+        // clearTimeout(timeRemaining);
         alert("Time Up!");
         stop();
         clearInterval(intervalId);
@@ -66,7 +69,7 @@ $(function () {
     // ===================================
 
     // Main startGame function
-    let ajaxArray = [];
+    let gameArray = [];
     let questionSection = document.getElementById("questionSection");
     // This click event runs the start game function. It hides the startButton on the HTML and then runs an AJAX Request
     $(document).on('click', '#startButton', function startGame() {
@@ -78,27 +81,44 @@ $(function () {
             $.ajax({
                 url: queryURL,
                 method: "GET"
-            }).then(function (startGame) {
-                console.log(startGame.results);
-                ajaxArray.push(startGame.results);
-                // Woking up to here, hides the start button, shows the questionSection, runs the ajax, console.log the ajax response.
-                let questionObj = $(ajaxArray); // transorming the array into an jQuery object
-                console.log(questionObj);
-                let questionCat = questionObj[0]; // Where this gets confusing again... from Yunus accessing the array when i created the array from the response.results created a key:0 + then the array
-                console.log(questionCat);
-                let question1 = questionCat[0].question; // creating a variable for question 1
-                console.log(question1);
-                // NEXT UP - figure out populating the answer buttons and refer to pseudo code
-                let correctAnswer1 = questionCat[0].correct_answer;
-                console.log(correctAnswer1);
-                let incorrectAnswers1 = questionCat[0].incorrect_answers;
-                console.log(incorrectAnswers1);
+            }).then(function (renderGame) {
+                console.log(renderGame.results);
+                gameArray = (renderGame.results);
+                console.log(renderGame);
+                console.log(gameArray[0].question)
+                $(`.questionField`).html(gameArray[thisQuestion].question); // need to increment on this.
+                correctAnswer = (gameArray[thisQuestion].correct_answer);
+                console.log(correctAnswer);
+                answers.push(correctAnswer);
+                gameArray[thisQuestion].incorrect_answers.forEach(element => {
+                    answers.push(element);
+                });
+                console.log(answers);
+                $(`.answer1`).html(answers[0]);
+                $(`.answer2`).html(answers[1]);
+                $(`.answer3`).html(answers[2]);
+                $(`.answer4`).html(answers[3]);
+                // need to shuffle the answers array before hitting html
+                // need to reset values of the answer btns before moving to next question
+
+                //     function shuffle(array) {
+                //     for (let i = array.length - 1; i > 0; i--) {
+                //         let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+                //         [array[i], array[j]] = [array[j], array[i]]; // swap elements
+                //     }
+                // } 
+
+                // need a click event to check their submitted answer against the correctanswer data
+                // 
 
 
             });
         };
+
+
     });
-    console.log(ajaxArray);
+
+    console.log(gameArray);
 
 });
 

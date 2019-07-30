@@ -25,25 +25,116 @@ $(function () {
     // From Elias //
     // let currentAnswerSet = triviaData[currentQuestion].incorrect_answers;
     // currentAnswerSet.push(triviaData[currentQuestion].correct_answer);
+    let seconds = 15;
+    let intervalId;
+    let $timeRemaining = document.getElementById("timeRemaining");
 
+    function startCountDown() {
+        decrement();
+
+    };
+    //  When the submit answer button gets clicked, run the stop function.
+    $("#submitAnswerBtn").on("click", clearClock);
+
+    function timeUp() {  // throws errors but does stop at 0....
+        clearTimeout(timeRemaining);
+        console.log("Time Up!");
+        clearInterval(intervalId);
+        // then 
+        // Move to next question....
+        // startCountDown();
+    };
+
+    // function stop() { // doesnt actually stop...
+    //     clearTimeout(timeRemaining);
+    //     clearInterval(intervalId);
+    //     console.log("Time stopped"); 
+    //     console.log(seconds);
+    //     startCountDown();
+    // };
+
+    function startClock() {
+        clearInterval(intervalId);
+        intervalId = setInterval(decrement, 1000);
+    }
+
+    function decrement() {
+        startClock();
+        seconds--;
+        $($timeRemaining).html("<h5>" + "Time Left: " + seconds + "</h5>");
+        //  Once seconds hits zero...
+        if (seconds === 0) {
+            //  ...run the timeUp function.
+            timeUp();
+            return false;
+            console.log()
+        }
+        // else {
+        //     setTimeout(timeRemaining, 15000)
+        // };
+    };
+
+
+    // =============working on timer=======================
+
+
+    // let $timeRemaining = document.getElementById("timeRemaining");
+    // function startCountDown() {
+    //     decrement();
+
+
+    // function stop() {
+    //     clearTimeout(seconds);
+    //     console.log("Time stopped"); // doesnt actually stop...
+    //     console.log(seconds);
+    //     // Move to next question.....
+
+    //     startCountDown();
+    // };
+    // function clearClock() {
+    //     clearInterval(intervalId);
+    //     intervalId = setInterval(decrement, 1000);
+    // }
+
+    // function timeUp() {
+    //     clearClock();
+    //     $timeRemaining.hide();
+    // }
+
+    // function decrement() {
+    //     clearClock();
+    //     seconds--;
+    //     $($timeRemaining).html("<h5>" + "Time Left: " + seconds + "</h5>");
+    //     //  Once seconds hits zero...
+    //     if (seconds === 0) {
+    //         //  ...run the timeUp function.
+    //         return false;
+    //         timeUp();
+    //     }
+    //     else {
+    //         setTimeout(timeRemaining, 15000)
+    //     };
+    // };
+
+    // };
 
     //Timer code from Emily //
     let seconds = 30;
 
-    // function startCountDown() {
+    function startCountDown() {
 
-    //     seconds--;
+        seconds--;
 
-    //     $($timer).text(`Time Left: ${seconds}`);
+        $($timer).text(`Time Left: ${seconds}`);
 
-    //     if (seconds === 0) {
-    //         clearTimeout(timer);
-    //         return false;
-    //     }
-    //     else {
-    //         setTimeout(countdown, 1000)
-    //     }
-    // }
+        if (seconds === 0) {
+            clearTimeout(timer);
+            return false;
+        }
+        else {
+            setTimeout(countdown, 1000)
+        }
+    }
 
 
 

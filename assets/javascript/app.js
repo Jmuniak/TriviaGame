@@ -11,67 +11,51 @@ $(function () {
 
 
 
-    // Time related functions. NEEDS HELP ============================
+    // Time related functions. 
     // Issues:
     // goes negative instead of stopping the clock.
     // needs a function for click handling to check the user's answer.
     // needs to have functionality to move to the next question and display properly.
-    let seconds = 15;
-    let intervalId;
-    let $timeRemaining = document.getElementById("timeRemaining");
-
-    function startCountDown() {
-        decrement();
-
-    };
-    //  When the submit answer button gets clicked, run the stop function.
-    $("#submitAnswerBtn").on("click", clearClock);
-
-    function timeUp() {  // throws errors but does stop at 0....
-        clearTimeout(timeRemaining);
-        console.log("Time Up!");
-        clearClock();
-        clearInterval(intervalId);
-
-        // then 
-        // Move to next question....
-        // startCountDown();
-    };
-
-    // function stop() { // doesnt actually stop...
-    //     clearTimeout(timeRemaining);
-    //     clearInterval(intervalId);
-    //     console.log("Time stopped"); 
-    //     console.log(seconds);
-    //     startCountDown();
-    // };
-
-    function clearClock() {
-        clearInterval(intervalId);
-        intervalId = setInterval(decrement, 1000);
-    }
-
-    function decrement() {
-        // clearClock();
-        seconds--;
-        $($timeRemaining).html("<h5>" + "Time Left: " + seconds + "</h5>");
-        //  Once seconds hits zero...
-        if (seconds === 0) {
-            //  ...run the timeUp function.
-            timeUp();
-
-            return false;
-        }
-        else {
-            setTimeout(timeRemaining, 15000)
-        };
-    };
-
-
     // =============working on timer=======================
+    // countDown () {
+    // seconds--;
+    // if (seconds < 15) {
+    // display the time.. $($timeRemaining).html("<h5>" + "Time Left: " + seconds + "</h5>");
+    // }
+    // if (seconds < 1 || user clicks submit) {
+    // run stop();
+    // }
+    // }
 
+    // stop() {
+    // display the correct answer
+    // wait 5 seconds but while it waits..
+    // run guessCheck();
+    // guessCheck () {
+    // if (correct answer score++;)
+    // if ( at end of qIndex.length) then run endGame(); 
+    // else ( More in qIndex) then run nextQuestion();
+    // }
+    // }
 
+    // nextQuestion () {
+    // move to next index in qIndex;
+    // reset seconds to 15;
+    // run countDown();
+    // }
+
+    // endGame () {
+    // hide the section Div;
+    // show "total: " + score + "/10"(out of 10)
+    // show startGame
+    // }
+
+    // ================================================================================================
+
+    // NOT WORKING CODE BELOW
     // let $timeRemaining = document.getElementById("timeRemaining");
+    // let seconds = 15;
+
     // function startCountDown() {
     //     decrement();
 
@@ -109,31 +93,21 @@ $(function () {
     //     };
     // };
 
-    // };
-
     // =================================================================
 
 
 
-    // Main startGame functions
-
-    // function correctGuess () {
-
-    // }
-
-    // function incorrectGuess () {
-
-    // }
-
+    // Main startButton functions
 
 
     let gameArray = [];
     let questionSection = document.getElementById("questionSection");
     // This click event runs the start game function. It hides the startButton on the HTML and then runs an AJAX Request
-    $(document).on('click', '#startButton', function startGame() {
+    $(document).on('click', '#startButton', function startClock() {
         $(this).hide(); // hide the start button
         questionSection.classList.add("show-me"); // show the questionSection
-        startCountDown(); // calls the startCountDown Function to begin the timer
+        countDown(); // calls the CountDown Function to begin the timer
+        // also need to navigate to index[0]
         {
             var queryURL = 'https://opentdb.com/api.php?amount=10&category=15&difficulty=medium&type=multiple';
             $.ajax({
@@ -167,25 +141,6 @@ $(function () {
                 //     }
                 // } 
 
-                // need a click event to check their submitted answer against the correctanswer data
-                // Function clickHandler for answer btns () (Not started)
-                //                 Reset timer and wait 7 seconds before starting to count down again.
-                //                 Check what answer btn was clicked. (Not started)
-                //                 Run and if else to check against the correct answer data value for that Question. (Not started)	
-                // 	Count their score for correct answers, increment the global var Score if correct.. (Not started)	
-                // 	Display correct answer for 7 seconds or if they got it right do something fun.
-                // 	After the 7 seconds, for loop to move onto the next question in the array without user input. (This is tough)
-                //                 Populate question and answer options again. (Not started)
-                //                 Else run EndGame if the array length has been reached.
-
-                //                 Function EndGame()(Not started)
-                //                 Reset Timer.
-                //                 Display correct answer score to the user.
-                //                 Display PlayAgain ? btn.
-
-                // Function PlayAgain btn()(Not started)
-                //                 Calls the startGame btn function again without refreshing the page.
-                //                 Essentially is the StartGame Btn but it will say play again at this point instead of start game.
 
                 //                 Write a Readme(not started)
 

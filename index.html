@@ -37,7 +37,7 @@
     <section id="questionSection" class="jumbotron  text-center hide-me">
         <!-- Time remaining field -->
         <div>
-            <h5 id="timeRemaining">Time remaining: 30</h5>
+            <h5 id="timeRemaining">Time remaining: 15</h5>
         </div>
         <!-- Question display field -->
         <div>
@@ -45,25 +45,27 @@
         </div>
         <!-- Answer option buttons I only able to select one -->
         <container class="optionBtns">
-            <!-- I want to do these in Radio input format aka input type=radio -->
+            <!-- I want to do these in Radio input format aka input type=button -->
             <!-- active" aria-pressed="true" IS NOT WORKING refer to bootstrap documentation -->
-            <button type="radio" class="col-3 btn1 active" aria-pressed="true">
-                <p class="answer1">Button1</p>
+            <button type="button" class="col-6 btn btn-primary active answer1">
+                Button1
             </button>
-            <button type="radio" class="col-3 btn2 active" aria-pressed="true">
-                <p class="answer2">Button2</p>
+            <button type="button" class="col-6 btn btn-primary active answer2">
+                Button2
             </button>
-            <button type="radio" class="col-3 btn3 active" aria-pressed="true">
-                <p class="answer3">Button3</p>
+            <button type="button" class="col-6 btn btn-primary active answer3">
+                Button3
             </button>
-            <button type="radio" class="col-3 btn4 active" aria-pressed="true">
-                <p class="answer4">Button4</p>
+            <button type="button" class="col-6 btn btn-primary active answer4">
+                Button4
             </button>
         </container>
-        <!-- submit their answer with this -->
-        <button class="col-12" id="submitAnswerBtn">submitAnswerButton</button>
     </section>
-
+    <div class="container" style="margin-top: 40px">
+        <div class="row">
+            <div class="col-12 text center hide-me" id="finalScore">Score goes here</div>
+        </div>
+    </div>
 
 
     <!-- bootstrap CDN -->
